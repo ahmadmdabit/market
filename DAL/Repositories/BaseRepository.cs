@@ -63,7 +63,7 @@ namespace DAL.Repositories
 
         #region IRepository Members
 
-        public virtual void Save(object obj)
+        public virtual void CreateOrUpdate(object obj)
         {
             _session.SaveOrUpdate(obj);
         }
@@ -73,17 +73,17 @@ namespace DAL.Repositories
             _session.Delete(obj);
         }
 
-        public virtual object Get(Type objType, object objId)
+        public virtual object Query(Type objType, object objId)
         {
             return _session.Load(objType, objId);
         }
 
-        public virtual IQueryable<TEntity> Get()
+        public virtual IQueryable<TEntity> Query()
         {
             return _session.Query<TEntity>();
         }
 
-        public virtual IQueryable<TEntity> Get(string propertyName, object propertyValue)
+        public virtual IQueryable<TEntity> Query(string propertyName, object propertyValue)
         {
             return _session.Query<TEntity>().Where(x => x.GetType().GetProperty(propertyName).GetValue(x) == propertyValue);
         }

@@ -5,14 +5,14 @@ namespace DAL.Repositories
 {
     public interface IRepository<TEntity>
     {
-        void Save(object obj);
+        void CreateOrUpdate(object obj);
 
         void Delete(object obj);
 
-        object Get(Type objType, object objId);
+        object Query(Type objType, object objId);
 
-        IQueryable<TEntity> Get();
+        IQueryable<TEntity> Query();
 
-        IQueryable<TEntity> Get(string propertyName, object propertyValue);
+        IQueryable<TEntity> Query(string propertyName, object propertyValue);
     }
 }
