@@ -10,7 +10,7 @@ namespace BLL
 
         void Delete(object obj);
 
-        TEntity Get(object objId);
+        TEntity Get(long objId);
 
         IQueryable<TEntity> Get();
 

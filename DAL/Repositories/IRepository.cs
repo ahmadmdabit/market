@@ -9,7 +9,7 @@ namespace DAL.Repositories
 
         void Delete(object obj);
 
-        object Query(Type objType, object objId);
+        object Query(Type objType, long objId);
 
         IQueryable<TEntity> Query();
 

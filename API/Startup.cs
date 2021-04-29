@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,16 @@ namespace API
 
             services.AddNHibernate(connStr);
 
+            #region Swagger
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Market API", Version = "v1" });
+            });
+
+            #endregion
+
             services.AddControllers();
         }
 
@@ -46,6 +57,19 @@ namespace API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            #region Swagger
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Market API V1");
+            });
+
+            #endregion
 
             app.UseEndpoints(endpoints =>
             {

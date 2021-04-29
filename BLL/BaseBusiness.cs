@@ -26,7 +26,7 @@ namespace BLL
             }
         }
 
-        public virtual TEntity Get(object objId)
+        public virtual TEntity Get(long objId)
         {
             return _Repository.Query(typeof(TEntity), objId) as TEntity;
         }

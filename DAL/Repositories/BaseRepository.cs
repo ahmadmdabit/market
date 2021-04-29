@@ -68,7 +68,7 @@ namespace DAL.Repositories
             _session.Delete(obj);
         }
 
-        public virtual object Query(Type objType, object objId)
+        public virtual object Query(Type objType, long objId)
         {
             return _session.Load(objType, objId);
         }

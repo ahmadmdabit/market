@@ -10,6 +10,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public abstract class BaseController<TEntity> : ControllerBase
         where TEntity : BaseEntity
     {
@@ -29,16 +30,16 @@ namespace API.Controllers
             return Ok(new ApiResponse { Status = true, Data = _Business.Get(), Error = null });
         }
 
-        [HttpGet("/{id}")]
-        public IActionResult Get(object id)
+        [HttpGet("{id}")]
+        public IActionResult GetById([FromRoute]long id)
         {
             _logger.LogInformation($"GET : {nameof(TEntity)} - {id}");
             var entity = _Business.Get(id);
             return Ok(new ApiResponse { Status = entity != null, Data = entity, Error = entity != null ? null : "Not Found!" });
         }
 
-        [HttpGet("/{propName}/{propValue}")]
-        public IActionResult Get(string propName, object propValue)
+        [HttpGet("{propName}/{propValue}")]
+        public IActionResult GetByProperty([FromRoute]string propName, [FromRoute]object propValue)
         {
             _logger.LogInformation($"GET : {nameof(TEntity)} - {propName}, {propValue}");
             var entity = _Business.Get(propName, propValue);
@@ -46,7 +47,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(TEntity entity)
+        public IActionResult Create([FromBody]TEntity entity)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(TEntity entity)
+        public IActionResult Update([FromBody]TEntity entity)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(TEntity entity)
+        public IActionResult Delete([FromBody]TEntity entity)
         {
             try
             {
