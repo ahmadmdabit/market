@@ -1,8 +1,7 @@
 ﻿namespace DAL.Entities
 {
-    public class Il
+    public class Il : BaseEntity
     {
-        public long ID { get; set; }
         public string Ad { get; set; }
         /// <summary>
         /// Latitude

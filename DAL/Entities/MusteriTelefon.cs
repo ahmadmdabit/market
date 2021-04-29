@@ -10,5 +10,7 @@
         /// (Phone no validation
         /// </summary>
         public string Telefon { get; set; }
+
+        public virtual Musteri Musteri { get; set; }
     }
 }

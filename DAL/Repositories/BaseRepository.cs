@@ -10,11 +10,6 @@ namespace DAL.Repositories
         protected ISession _session = null;
         protected ITransaction _transaction = null;
 
-        public BaseRepository()
-        {
-            _session = Database.OpenSession();
-        }
-
         public BaseRepository(ISession session)
         {
             _session = session;

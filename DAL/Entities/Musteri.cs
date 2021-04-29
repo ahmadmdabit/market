@@ -2,7 +2,7 @@
 
 namespace DAL.Entities
 {
-    public class Musteri
+    public class Musteri : BaseEntity
     {
         /// <summary>
         /// zorunlu alan
@@ -27,7 +27,7 @@ namespace DAL.Entities
         /// <summary>
         /// date pickup
         /// </summary>
-        public DateTime DogumTarihi { get; set; }
+        public DateTime? DogumTarihi { get; set; }
 
         /// <summary>
         /// zorunlu alan) (mail validation
@@ -49,7 +49,7 @@ namespace DAL.Entities
         /// <summary>
         /// Select list box
         /// </summary>
-        public long IlID { get; set; }
+        public long? IlID { get; set; }
 
         /// <summary>
         /// multitext box
