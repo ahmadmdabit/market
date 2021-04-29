@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Entities
 {
@@ -7,21 +8,25 @@ namespace DAL.Entities
         /// <summary>
         /// zorunlu alan
         /// </summary>
+        [Required]
         public string Ad { get; set; }
 
         /// <summary>
         /// zorunlu alan
         /// </summary>
+        [Required]
         public string Soyad { get; set; }
 
         /// <summary>
         /// zorunlu alan
         /// </summary>
+        [Required]
         public bool Cinsiyet { get; set; }
 
         /// <summary>
         /// zorunlu alan
         /// </summary>
+        [Required]
         public string Meslegi { get; set; }
 
         /// <summary>
@@ -32,11 +37,14 @@ namespace DAL.Entities
         /// <summary>
         /// zorunlu alan) (mail validation
         /// </summary>
+        [Required]
+        [EmailAddress]
         public string MailAdresi { get; set; }
 
         /// <summary>
         /// domain name validation
         /// </summary>
+        [Url]
         public string WebSitesi { get; set; }
 
         /// <summary>

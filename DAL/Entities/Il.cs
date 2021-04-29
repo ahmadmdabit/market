@@ -1,7 +1,10 @@
-﻿namespace DAL.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DAL.Entities
 {
     public class Il : BaseEntity
     {
+        [Required]
         public string Ad { get; set; }
         /// <summary>
         /// Latitude
