@@ -36,7 +36,7 @@ namespace BLL
             return _Repository.Query();
         }
 
-        public virtual IQueryable<TEntity> Get(string propertyName, object propertyValue)
+        public virtual IQueryable<TEntity> Get(string propertyName, string propertyValue)
         {
             return _Repository.Query(propertyName, propertyValue);
         }

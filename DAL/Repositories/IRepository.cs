@@ -13,6 +13,6 @@ namespace DAL.Repositories
 
         IQueryable<TEntity> Query();
 
-        IQueryable<TEntity> Query(string propertyName, object propertyValue);
+        IQueryable<TEntity> Query(string propertyName, string propertyValue);
     }
 }

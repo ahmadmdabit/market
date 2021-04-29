@@ -1,6 +1,7 @@
 ﻿using NHibernate;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DAL.Repositories
 {
@@ -78,9 +79,20 @@ namespace DAL.Repositories
             return _session.Query<TEntity>();
         }
 
-        public virtual IQueryable<TEntity> Query(string propertyName, object propertyValue)
+        public virtual IQueryable<TEntity> Query(string propertyName, string propertyValue)
         {
-            return _session.Query<TEntity>().Where(x => x.GetType().GetProperty(propertyName).GetValue(x) == propertyValue);
+            var propertyType = typeof(TEntity).GetProperty(propertyName).PropertyType;
+            var param = Expression.Parameter(typeof(TEntity));
+            var condition =
+                Expression.Lambda<Func<TEntity, bool>>(
+                    Expression.Equal(
+                        Expression.Property(param, propertyName),
+                        Expression.Constant(Convert.ChangeType(propertyValue, propertyType), propertyType)
+                    ),
+                    param
+                );
+
+            return _session.Query<TEntity>().Where(condition);
         }
 
         #endregion IRepository Members

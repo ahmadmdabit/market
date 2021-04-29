@@ -39,7 +39,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{propName}/{propValue}")]
-        public IActionResult GetByProperty([FromRoute]string propName, [FromRoute]object propValue)
+        public IActionResult GetByProperty([FromRoute]string propName, [FromRoute]string propValue)
         {
             _logger.LogInformation($"GET : {nameof(TEntity)} - {propName}, {propValue}");
             var entity = _Business.Get(propName, propValue);

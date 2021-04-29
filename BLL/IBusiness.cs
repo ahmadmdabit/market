@@ -14,6 +14,6 @@ namespace BLL
 
         IQueryable<TEntity> Get();
 
-        IQueryable<TEntity> Get(string propertyName, object propertyValue);
+        IQueryable<TEntity> Get(string propertyName, string propertyValue);
     }
 }
