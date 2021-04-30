@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Entities
@@ -65,5 +67,14 @@ namespace DAL.Entities
         public string Notlar { get; set; }
 
         public virtual Il Il { get; set; }
+        public virtual ICollection<MusteriTelefon> MusteriTelefonlar { get; set; }
+
+        public Musteri()
+        {
+            if (MusteriTelefonlar == null)
+            {
+                MusteriTelefonlar = new HashSet<MusteriTelefon>();
+            }
+        }
     }
 }

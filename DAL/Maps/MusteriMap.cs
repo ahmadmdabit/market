@@ -39,6 +39,13 @@ namespace DAL.Maps
                 x.NotNullable(true);
             });
 
+            Property(b => b.Meslegi, x =>
+            {
+                x.Length(128);
+                x.Type(NHibernateUtil.StringClob);
+                x.NotNullable(true);
+            });
+
             Property(b => b.DogumTarihi, x =>
             {
                 x.Type(NHibernateUtil.Date);
@@ -102,6 +109,12 @@ namespace DAL.Maps
                 x.Type(NHibernateUtil.Boolean);
                 x.NotNullable(false);
             });
+
+            Bag(s => s.MusteriTelefonlar, x =>
+            {
+                x.Key(t => t.Column("MusteriID"));
+                x.Cascade(Cascade.All);
+            }, a => a.OneToMany());
 
             Table("Musteriler");
         }

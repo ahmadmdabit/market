@@ -31,6 +31,8 @@ namespace API
 
             services.AddNHibernate(connStr);
 
+            services.ConfigureCorsService();
+
             #region Swagger
 
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -45,16 +47,19 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            app.UseExceptionHandler(err => err.UseCustomErrors(env, logger, true));
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCorsService();
 
             app.UseAuthorization();
 

@@ -35,7 +35,12 @@ namespace API.Controllers
         {
             _logger.LogInformation($"GET : {nameof(TEntity)} - {id}");
             var entity = _Business.Get(id);
-            return Ok(new ApiResponse { Status = entity != null, Data = entity, Error = entity != null ? null : "Not Found!" });
+            ErrorResult errorResult = null;
+            if (entity == null)
+            {
+                errorResult = new ErrorResult(404, "Not Found!");
+            }
+            return Ok(new ApiResponse { Status = entity != null, Data = entity, Error = errorResult });
         }
 
         [HttpGet("{propName}/{propValue}")]
@@ -43,7 +48,12 @@ namespace API.Controllers
         {
             _logger.LogInformation($"GET : {nameof(TEntity)} - {propName}, {propValue}");
             var entity = _Business.Get(propName, propValue);
-            return Ok(new ApiResponse { Status = entity != null, Data = entity, Error = entity != null ? null : "Not Found!" });
+            ErrorResult errorResult = null;
+            if (entity == null)
+            {
+                errorResult = new ErrorResult(404, "Not Found!");
+            }
+            return Ok(new ApiResponse { Status = entity != null, Data = entity, Error = errorResult });
         }
 
         [HttpPost]
@@ -58,7 +68,7 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Create : {ex.Message}");
-                return Ok(new ApiResponse { Status = false, Data = null, Error = "Internal server error" });
+                return Ok(new ApiResponse { Status = false, Data = null, Error = new ErrorResult(500, ex.Message) });
             }
         }
 
@@ -74,7 +84,7 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Update : {ex.Message}");
-                return Ok(new ApiResponse { Status = false, Data = null, Error = "Internal server error" });
+                return Ok(new ApiResponse { Status = false, Data = null, Error = new ErrorResult(500, ex.Message) });
             }
         }
 
@@ -90,7 +100,7 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Delete : {ex.Message}");
-                return Ok(new ApiResponse { Status = false, Data = null, Error = "Internal server error" });
+                return Ok(new ApiResponse { Status = false, Data = null, Error = new ErrorResult(500, ex.Message) });
             }
         }
     }

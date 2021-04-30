@@ -12,12 +12,12 @@ namespace DAL.Maps
             Lazy(false);
 
             Id(x => x.ID, x =>
-                {
-                    x.Generator(Generators.Identity);
-                    x.Type(NHibernateUtil.Int64);
-                    x.Column("ID");
-                    x.UnsavedValue(0);
-                });
+            {
+                x.Generator(Generators.Identity);
+                x.Type(NHibernateUtil.Int64);
+                x.Column("ID");
+                x.UnsavedValue(0);
+            });
 
             Property(b => b.MusteriID, x =>
             {
