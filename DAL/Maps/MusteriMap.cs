@@ -113,7 +113,7 @@ namespace DAL.Maps
             Bag(s => s.MusteriTelefonlar, x =>
             {
                 x.Key(t => t.Column("MusteriID"));
-                x.Cascade(Cascade.All);
+                x.Cascade(Cascade.All | Cascade.DeleteOrphans);
             }, a => a.OneToMany());
 
             Table("Musteriler");
